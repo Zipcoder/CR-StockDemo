@@ -38,4 +38,9 @@ public class MetaData {
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
     }
+
+    @Override
+    public String toString(){
+        return String.format("Information:\t%s\nSymbol:\t%s\ntimeZone\t%s\n", information, symbol, timeZone);
+    }
 }

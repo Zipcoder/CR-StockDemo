@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -9,18 +11,25 @@ import java.util.HashMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StockResponse {
 
-    @JsonProperty("Meta Data")
+    private static final Logger log = LoggerFactory.getLogger(StockResponse.class);
+
+    @JsonProperty(value = "Meta Data", required = false)
     private MetaData metaData;
 
 
-    @JsonProperty("Monthly Time Series")
-    private HashMap<String, MonthlyTimeSeries> monthlyTimeSeries;
+    @JsonProperty(value = "Monthly Time Series", required = false)
+    private HashMap<String, MonthlyTimeSeriesEntry> monthlyTimeSeries;
 
-    public HashMap<String, MonthlyTimeSeries> getMonthlyTimeSeries() {
+
+    public StockResponse(){
+        log.info("Creating StockResponse instance");
+    }
+
+    public HashMap<String, MonthlyTimeSeriesEntry> getMonthlyTimeSeries() {
         return monthlyTimeSeries;
     }
 
-    public void setMonthlyTimeSeries(HashMap<String, MonthlyTimeSeries> monthlyTimeSeries) {
+    public void setMonthlyTimeSeries(HashMap<String, MonthlyTimeSeriesEntry> monthlyTimeSeries) {
         this.monthlyTimeSeries = monthlyTimeSeries;
     }
 
@@ -29,13 +38,15 @@ public class StockResponse {
     }
 
     public void setMetaData(MetaData metaData) {
+        log.info("Metadata set to:\n" + metaData);
+
         this.metaData = metaData;
     }
 
     @Override
     public String toString() {
         return "StockResponse{" +
-                "mettadata='" + metaData.getInformation()  + '\'' +
+                "metadata='" + metaData  + '\'' +
                 ", time=" + monthlyTimeSeries.toString() +
                 '}';
     }
