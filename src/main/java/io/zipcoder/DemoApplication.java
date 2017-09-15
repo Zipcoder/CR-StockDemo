@@ -1,5 +1,6 @@
-package com.example.demo;
+package io.zipcoder;
 
+import io.zipcoder.domain.responses.StockResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -26,7 +27,6 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
-
 			StockResponse stockResponse = restTemplate.getForObject("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=GOOGL&apikey=E27KD0LF72Q908J6", StockResponse.class);
 			log.info(stockResponse.toString());
 		};

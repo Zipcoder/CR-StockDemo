@@ -1,13 +1,16 @@
-package com.example.demo;
+package io.zipcoder.domain.temporalresolution;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.zipcoder.utilities.JSONString;
+import org.springframework.stereotype.Component;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class MonthlyTimeSeries {
+@Component
+public abstract class TemporalResolution implements JSONString {
 
     @JsonProperty("1. open")
     private String open;
+
     @JsonProperty("2. high")
     private String high;
 
@@ -16,10 +19,6 @@ public class MonthlyTimeSeries {
 
     @JsonProperty("4. close")
     private String close;
-
-    @JsonProperty("5. volume")
-    private String volume;
-
 
     public String getOpen() {
         return open;
@@ -53,11 +52,11 @@ public class MonthlyTimeSeries {
         this.close = close;
     }
 
-    public String getVolume() {
-        return volume;
-    }
-
-    public void setVolume(String volume) {
-        this.volume = volume;
+    @Override
+    public String toString() {
+        return "open: " + open +
+                ",high: " + high +
+                ",low: " + low +
+                ",close: " + close;
     }
 }
