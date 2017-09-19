@@ -18,7 +18,7 @@ public abstract class TemporalEndPointFactory<T extends StockResponse> {
         this.paramFunction = paramFunction;
     }
 
-    public EndPoint<T> get(ParamInterval interval, ParamSymbol symbol, ParamOutputSize outputSize) {
+    private EndPoint<T> get(ParamInterval interval, ParamSymbol symbol, ParamOutputSize outputSize) {
         return factory.get(paramFunction, interval, symbol, outputSize);
     }
 

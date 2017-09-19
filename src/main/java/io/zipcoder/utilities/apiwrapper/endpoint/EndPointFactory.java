@@ -6,11 +6,13 @@ import io.zipcoder.utilities.apiwrapper.parameters.ParamInterval;
 import io.zipcoder.utilities.apiwrapper.parameters.ParamOutputSize;
 import io.zipcoder.utilities.apiwrapper.parameters.ParamSymbol;
 
+import java.util.logging.Logger;
+
 /**
  * Created by leon on 9/14/17.
  */
 public final class EndPointFactory<T extends StockResponse> {
-
+    private final Logger log = Logger.getLogger(getClass().getSimpleName());
     private final String apiKey;
 
     public EndPointFactory(String apiKey) {
@@ -18,7 +20,10 @@ public final class EndPointFactory<T extends StockResponse> {
     }
 
     public EndPoint<T> get(ParamFunction function, ParamInterval interval, ParamSymbol symbol, ParamOutputSize outputSize) {
-        return new EndPoint<>(function, interval, symbol, outputSize, apiKey);
+        EndPoint endPoint = new EndPoint<>(function, interval, symbol, outputSize, apiKey);
+        log.info("Successfully created new endpoint.");
+        log.info("EndPoint URI = " + endPoint.toString());
+        return endPoint;
     }
 
 

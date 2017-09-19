@@ -5,4 +5,10 @@ package io.zipcoder.utilities.apiwrapper.parameters;
  */
 public enum ParamSymbol {
     MSFT;
+
+    @Override
+    public String toString() {
+        // API representation
+        return this.name();
+    }
 }

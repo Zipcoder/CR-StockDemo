@@ -4,18 +4,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.zipcoder.domain.temporalresolution.TemporalResolution;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashMap;
 
 
+@MappedSuperclass
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class StockResponse<T extends TemporalResolution> {
+public abstract class StockResponse<T extends TemporalResolution> implements Serializable {
+    @Id
+    @GeneratedValue
+    private long id;
 
     @JsonProperty("Meta Data")
     private MetaData metaData;
 
-
-    @JsonProperty("Monthly Time Series")
+    @JsonProperty("Time Series")
     private HashMap<Date, T> temporalResolutionData;
 
     public HashMap<Date, T> getTemporalResolutionData() {

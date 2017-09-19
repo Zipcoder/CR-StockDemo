@@ -9,15 +9,16 @@ public enum ParamInterval {
     FIFTEEN(15),
     THIRTY(30),
     SIXTY(60);
-    private final Integer minuteInterval;
 
-    ParamInterval(Integer minuteInterval) {
+    private final int minuteInterval;
+
+    ParamInterval(int minuteInterval) {
         this.minuteInterval = minuteInterval;
     }
 
     @Override
     public String toString() {
         // API representation
-        return minuteInterval.toString() + "min";
+        return minuteInterval + "min";
     }
 }

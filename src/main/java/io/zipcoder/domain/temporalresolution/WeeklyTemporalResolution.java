@@ -8,7 +8,7 @@ import io.zipcoder.utilities.JSONString;
  * Created by leon on 9/14/17.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeeklyTemporalResolution extends TemporalResolution implements JSONString {
+public class WeeklyTemporalResolution extends TemporalResolution {
 
     @JsonProperty("5. volume")
     private String volume;
