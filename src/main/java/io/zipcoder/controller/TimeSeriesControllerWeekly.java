@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/timeseries/weekly")
-public class WeeklyTimeSeriesController {
+public class TimeSeriesControllerWeekly {
 }

@@ -10,12 +10,13 @@ import java.util.logging.Logger;
 
 /**
  * Created by leon on 9/14/17.
+ * EndPoint factory
  */
-public final class EndPointFactory<T extends StockResponse> {
+public final class FactoryEndPoint<T extends StockResponse> {
     private final Logger log = Logger.getLogger(getClass().getSimpleName());
     private final String apiKey;
 
-    public EndPointFactory(String apiKey) {
+    public FactoryEndPoint(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -27,20 +28,21 @@ public final class EndPointFactory<T extends StockResponse> {
     }
 
 
-    public EndPoint get(ParamFunction function, ParamInterval interval, ParamSymbol symbol) {
-        return get(function, interval, symbol, ParamOutputSize.FULL);
+    public EndPoint<T> get(ParamFunction function, ParamSymbol symbol, ParamOutputSize outputSize) {
+        return get(function, null, symbol, outputSize);
     }
+
 
     public EndPoint get(String function, String interval, String symbol, String outputSize) {
         return get(
                 ParamFunction.valueOf(function),
-                ParamInterval.valueOf(interval),
+                ParamInterval.getValueOf(interval),
                 ParamSymbol.valueOf(symbol),
                 ParamOutputSize.valueOf(outputSize));
     }
 
-    public EndPoint get(String function, String interval, String symbol) {
-        return get(function, interval, symbol, ParamOutputSize.FULL.toString());
+    public EndPoint get(String function, String symbol, String outputSize) {
+        return get(function, null, symbol, outputSize);
     }
 
 }

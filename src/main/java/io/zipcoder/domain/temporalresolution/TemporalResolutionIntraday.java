@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by leon on 9/14/17.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DailyTemporalResolution extends TemporalResolution {
+public class TemporalResolutionIntraday extends TemporalResolution {
+
     @JsonProperty("5. volume")
     private String volume;
 
@@ -21,16 +22,11 @@ public class DailyTemporalResolution extends TemporalResolution {
 
     @Override
     public String toJsonString() {
-        String open = super.getOpen();
-        String high = super.getHigh();
-        String low = super.getLow();
-        String close = super.getClose();
-
-        return "{" + toString() +  "}";
+        return "{" + this.toString() +  "}";
     }
 
     public String toString() {
-        return super.toString() + "volume: " + volume;
+        return super.toString() + ", volume: " + volume;
     }
 }
 

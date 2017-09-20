@@ -7,6 +7,8 @@ import io.zipcoder.utilities.apiwrapper.parameters.ParamOutputSize;
 import io.zipcoder.utilities.apiwrapper.parameters.ParamSymbol;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.MessageFormat;
+
 /**
  * Created by leon on 9/14/17.
  */
@@ -14,12 +16,12 @@ public class EndPoint<T extends StockResponse> {
     private final String apiCall;
 
     EndPoint(ParamFunction function, ParamInterval interval, ParamSymbol symbol, ParamOutputSize outputSize, String apiKey) {
-        this.apiCall = "https://www.alphavantage.co/query" +
-                "?function=" + function.toString() +
-                "&symbol=" + symbol.toString() +
-                "&interval=" + interval.toString() +
-                "&outputsize=" + outputSize.toString() +
-                "&apikey=" + apiKey;
+        this.apiCall = MessageFormat.format("https://www.alphavantage.co/query?{0}{1}{2}{3}&apikey={4}",
+                function.toString(),
+                symbol.toString(),
+                interval == null ? "" : interval.toString(),
+                outputSize.toString(),
+                apiKey);
     }
 
     public T call(Class<T> cls) {

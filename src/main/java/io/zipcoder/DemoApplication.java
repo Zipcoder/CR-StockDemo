@@ -1,14 +1,10 @@
 package io.zipcoder;
 
-import io.zipcoder.domain.responses.DailyStockResponse;
+import io.zipcoder.domain.responses.StockResponseDaily;
 import io.zipcoder.domain.responses.MetaData;
-import io.zipcoder.domain.responses.StockResponse;
-import io.zipcoder.domain.responses.WeeklyStockResponse;
-import io.zipcoder.domain.temporalresolution.DailyTemporalResolution;
-import io.zipcoder.domain.temporalresolution.WeeklyTemporalResolution;
-import io.zipcoder.utilities.apiwrapper.endpoint.DailyEndPointFactory;
+import io.zipcoder.domain.temporalresolution.TemporalResolutionDaily;
+import io.zipcoder.utilities.apiwrapper.endpoint.FactoryEndPointDaily;
 import io.zipcoder.utilities.apiwrapper.endpoint.EndPoint;
-import io.zipcoder.utilities.apiwrapper.endpoint.WeeklyEndPointFactory;
 import io.zipcoder.utilities.apiwrapper.parameters.ParamInterval;
 import io.zipcoder.utilities.apiwrapper.parameters.ParamSymbol;
 import org.slf4j.Logger;
@@ -22,7 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
-import java.util.Collections;
 import java.util.HashMap;
 
 @EnableAutoConfiguration
@@ -44,11 +39,11 @@ public class DemoApplication {
     public CommandLineRunner run(RestTemplate restTemplate) {
 	    return args -> {
 	        // https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo
-            DailyEndPointFactory factory = new DailyEndPointFactory("demo");
-            EndPoint<DailyStockResponse> endPoint = factory.getFullOutput(ParamInterval.FIFTEEN, ParamSymbol.MSFT);
-            DailyStockResponse response = endPoint.call(restTemplate, DailyStockResponse.class);
+            FactoryEndPointDaily factory = new FactoryEndPointDaily("demo");
+            EndPoint<StockResponseDaily> endPoint = factory.getFullOutput(ParamSymbol.MSFT);
+            StockResponseDaily response = endPoint.call(restTemplate, StockResponseDaily.class);
             MetaData metaData = response.getMetaData();
-            HashMap<Date, DailyTemporalResolution> timeSeries = response.getTemporalResolutionData();
+            HashMap<Date, TemporalResolutionDaily> timeSeries = response.getTemporalResolutionData();
             log.info(metaData.toString());
             log.info(timeSeries.toString());
         };

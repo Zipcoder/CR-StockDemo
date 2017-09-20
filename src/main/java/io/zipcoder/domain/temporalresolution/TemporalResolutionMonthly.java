@@ -2,13 +2,10 @@ package io.zipcoder.domain.temporalresolution;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.zipcoder.utilities.JSONString;
 
-/**
- * Created by leon on 9/14/17.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IntraDailyTemporalResolution extends TemporalResolution {
-
+public class TemporalResolutionMonthly extends TemporalResolution {
     @JsonProperty("5. volume")
     private String volume;
 
@@ -22,11 +19,10 @@ public class IntraDailyTemporalResolution extends TemporalResolution {
 
     @Override
     public String toJsonString() {
-        return "{" + this.toString() +  "}";
+        return "{" + toString() +  "}";
     }
 
     public String toString() {
-        return super.toString() + ", volume: " + volume;
+        return super.toString() + ",volume: " + volume;
     }
 }
-

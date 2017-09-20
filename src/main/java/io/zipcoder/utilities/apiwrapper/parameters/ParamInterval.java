@@ -19,6 +19,14 @@ public enum ParamInterval {
     @Override
     public String toString() {
         // API representation
-        return minuteInterval + "min";
+        return "&interval=" + minuteInterval + "min";
+    }
+
+    public static ParamInterval getValueOf(String s) {
+        try {
+            return valueOf(s);
+        } catch (NullPointerException npe) {
+            return null;
+        }
     }
 }
